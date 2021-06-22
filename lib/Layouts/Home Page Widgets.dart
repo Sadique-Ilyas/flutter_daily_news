@@ -1,11 +1,13 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_daily_news/Controller/News%20Controller.dart';
+import 'package:flutter_daily_news/Layouts/Detailed%20Page.dart';
+import 'package:flutter_daily_news/Models/News%20Model.dart';
 import 'package:get/get.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 
-class Widgets {
+class HomePageWidgets {
   final NewsController newsController = Get.put(NewsController());
 
   //Tabs
@@ -60,7 +62,7 @@ class Widgets {
   }
 
   // Carousel Slider
-  myCarouselSlider(RxList news) {
+  myCarouselSlider(RxList<Datum> news) {
     return CarouselSlider(
       options: CarouselOptions(
         height: 150,
@@ -87,7 +89,6 @@ class Widgets {
                   width: MediaQuery.of(context).size.width,
                   margin: EdgeInsets.symmetric(horizontal: 5.0),
                   decoration: BoxDecoration(
-                      color: Colors.amber,
                       borderRadius: BorderRadius.all(Radius.circular(10))),
                   child: Stack(
                     alignment: Alignment.center,
@@ -104,6 +105,7 @@ class Widgets {
                               ),
                             )
                           : FlutterLogo(
+                              style: FlutterLogoStyle.horizontal,
                               size: double.maxFinite,
                             ),
                       Align(
@@ -136,7 +138,7 @@ class Widgets {
   final DateFormat formatter = DateFormat('dd-MMM-yyyy');
 
   // List View
-  myListView(RxList news) {
+  myListView(RxList<Datum> news) {
     return Expanded(
       child: Padding(
         padding: const EdgeInsets.all(5.0),
@@ -152,8 +154,11 @@ class Widgets {
                   overflow: TextOverflow.ellipsis,
                 ),
                 subtitle: Text(
-                  "Published At: ${formatter.format(news[index].publishedAt)}",
-                  style: TextStyle(fontSize: 10),
+                  "Source: ${news[index].source}",
+                  style: TextStyle(
+                      fontSize: 10,
+                      fontStyle: FontStyle.italic,
+                      fontWeight: FontWeight.w500),
                 ),
                 dense: true,
                 leading: Container(
@@ -169,6 +174,9 @@ class Widgets {
                         )
                       : FlutterLogo(),
                 ),
+                onTap: () {
+                  Get.to(() => DetailedPage(), arguments: news[index]);
+                },
               ),
             );
           },
