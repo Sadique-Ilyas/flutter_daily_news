@@ -1,5 +1,5 @@
-import 'package:flutter_daily_news/API/API%20Services.dart';
 import 'package:flutter_daily_news/Models/News%20Model.dart';
+import 'package:flutter_daily_news/Services/API%20Services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 

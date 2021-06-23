@@ -13,7 +13,8 @@ class HomePage extends StatelessWidget {
       initialIndex: 0,
       child: Scaffold(
           key: _scaffoldKey,
-          appBar: HomePageWidgets().myAppBar(),
+          appBar: HomePageWidgets().myAppBar(_scaffoldKey),
+          drawer: Drawer(),
           backgroundColor: Colors.white,
           body: HomePageWidgets().myTabBarView()),
     );

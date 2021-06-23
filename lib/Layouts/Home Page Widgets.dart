@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_daily_news/Controller/News%20Controller.dart';
@@ -36,7 +37,7 @@ class HomePageWidgets {
   ];
 
   // App Bar
-  myAppBar() {
+  myAppBar(GlobalKey<ScaffoldState> scaffoldKey) {
     return AppBar(
       title: Text(
         "Daily News",
@@ -45,6 +46,25 @@ class HomePageWidgets {
       elevation: 0,
       centerTitle: true,
       backgroundColor: Colors.white,
+      leading: InkWell(
+        onTap: () {
+          scaffoldKey.currentState.openDrawer();
+        },
+        child: IconButton(
+            icon: Icon(
+              Icons.menu,
+              color: Colors.black,
+            ),
+            onPressed: null),
+      ),
+      actions: [
+        IconButton(
+            icon: Icon(
+              Icons.search,
+              color: Colors.black,
+            ),
+            onPressed: () => Fluttertoast.showToast(msg: "Tapped !"))
+      ],
       bottom: TabBar(
           isScrollable: true,
           unselectedLabelColor: Colors.black,
@@ -97,8 +117,8 @@ class HomePageWidgets {
                           ? ClipRRect(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(10)),
-                              child: Image.network(
-                                news.image,
+                              child: CachedNetworkImage(
+                                imageUrl: news.image,
                                 fit: BoxFit.fill,
                                 height: double.infinity,
                                 width: double.infinity,
@@ -135,8 +155,6 @@ class HomePageWidgets {
     );
   }
 
-  final DateFormat formatter = DateFormat('dd-MMM-yyyy');
-
   // List View
   myListView(RxList<Datum> news) {
     return Expanded(
@@ -167,8 +185,8 @@ class HomePageWidgets {
                   child: news[index].image != null
                       ? ClipRRect(
                           borderRadius: BorderRadius.all(Radius.circular(5)),
-                          child: Image.network(
-                            news[index].image,
+                          child: CachedNetworkImage(
+                            imageUrl: news[index].image,
                             fit: BoxFit.fill,
                           ),
                         )
