@@ -64,16 +64,18 @@ class DetailedPageWidgets {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Text("Source: "),
-                            Card(
-                              color: Colors.orange.shade100,
-                              child: Padding(
-                                padding: const EdgeInsets.all(4.0),
-                                child: Text(
-                                    news.country != null
-                                        ? news.country
-                                        : "Unknown",
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.w500)),
+                            Expanded(
+                              child: Card(
+                                color: Colors.orange.shade100,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(4.0),
+                                  child: Text(
+                                      news.source != null
+                                          ? news.source
+                                          : "Unknown",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w500)),
+                                ),
                               ),
                             )
                           ],
@@ -136,8 +138,13 @@ class DetailedPageWidgets {
                               color: Colors.green.shade100,
                               child: Padding(
                                 padding: const EdgeInsets.all(4.0),
-                                child: Text(news.country.toString().split('.').last ??
-                                      "Unknown",
+                                child: Text(
+                                    news.country != null
+                                        ? news.country
+                                            .toString()
+                                            .split('.')
+                                            .last
+                                        : "Unknown",
                                     style:
                                         TextStyle(fontWeight: FontWeight.w500)),
                               ),
@@ -285,9 +292,10 @@ class DetailedPageWidgets {
     String publishedAt = formatter.format(news.publishedAt) ?? null;
     BookMarkModel bookednews = BookMarkModel(author, title, description, url,
         source, image, category, language, country, publishedAt);
-    Hive.box('bookmarks')
-        .add(bookednews)
-        .then((value) => Get.snackbar("Bookmark Added !", ""));
+    Hive.box('bookmarks').add(bookednews).then((value) => Get.snackbar(
+        "Bookmark Added !", "",
+        snackPosition: SnackPosition.BOTTOM,
+        margin: EdgeInsets.only(bottom: 10)));
   }
 
   myfabCircularMenu(
