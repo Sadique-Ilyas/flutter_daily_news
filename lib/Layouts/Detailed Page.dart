@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_daily_news/Controller/Animation%20Controller.dart';
-import 'package:flutter_daily_news/Layouts/Detailed%20Page%20Widgets.dart';
+import 'package:flutter_daily_news/Widgets/Detailed%20Page%20Widgets.dart';
 import 'package:flutter_daily_news/Models/News%20Model.dart';
 import 'package:get/get.dart';
 

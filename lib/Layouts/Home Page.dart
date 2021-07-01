@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_daily_news/Controller/News%20Controller.dart';
-import 'package:flutter_daily_news/Layouts/Home%20Page%20Widgets.dart';
+import 'package:flutter_daily_news/Widgets/Home%20Page%20Widgets.dart';
 import 'package:get/get.dart';
 
 class HomePage extends StatelessWidget {
@@ -14,7 +14,7 @@ class HomePage extends StatelessWidget {
       child: Scaffold(
           key: _scaffoldKey,
           appBar: HomePageWidgets().myAppBar(_scaffoldKey),
-          drawer: Drawer(),
+          drawer: HomePageWidgets().myDrawer(_scaffoldKey),
           backgroundColor: Colors.white,
           body: HomePageWidgets().myTabBarView()),
     );

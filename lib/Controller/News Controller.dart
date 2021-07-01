@@ -5,14 +5,13 @@ import 'package:get/get.dart';
 
 class NewsController extends GetxController {
   var isLoading = true.obs;
-  var generalNewsList = List<Datum>().obs;
-  var businessNewsList = List<Datum>().obs;
-  var entertainmentNewsList = List<Datum>().obs;
-  var healthNewsList = List<Datum>().obs;
-  var scienceNewsList = List<Datum>().obs;
-  var sportsNewsList = List<Datum>().obs;
-  var technologyNewsList = List<Datum>().obs;
-
+  var generalNewsList = <Datum>[].obs;
+  var businessNewsList = <Datum>[].obs;
+  var entertainmentNewsList = <Datum>[].obs;
+  var healthNewsList = <Datum>[].obs;
+  var scienceNewsList = <Datum>[].obs;
+  var sportsNewsList = <Datum>[].obs;
+  var technologyNewsList = <Datum>[].obs;
   @override
   void onInit() {
     fetchNews("general");

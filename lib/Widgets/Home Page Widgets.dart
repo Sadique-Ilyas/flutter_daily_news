@@ -6,7 +6,7 @@ import 'package:flutter_daily_news/Layouts/Detailed%20Page.dart';
 import 'package:flutter_daily_news/Models/News%20Model.dart';
 import 'package:get/get.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:intl/intl.dart';
+import 'package:flutter_daily_news/Layouts/Bookmark Page.dart';
 
 class HomePageWidgets {
   final NewsController newsController = Get.put(NewsController());
@@ -259,6 +259,28 @@ class HomePageWidgets {
               myListView(news)
             ],
           ));
+  }
+
+  myDrawer(GlobalKey<ScaffoldState> scaffoldKey) {
+    return Drawer(
+      child: Column(
+        children: [
+          DrawerHeader(child: null),
+          ListTile(
+            title: Text("Bookmarks"),
+            leading: Icon(Icons.bookmark, color: Colors.black),
+            onTap: () {
+              Get.back();
+              Get.to(() => BookmarkPage());
+            },
+          ),
+          Divider(),
+          ListTile(
+              title: Text("Favorites"),
+              leading: Icon(Icons.favorite, color: Colors.black))
+        ],
+      ),
+    );
   }
 }
 
