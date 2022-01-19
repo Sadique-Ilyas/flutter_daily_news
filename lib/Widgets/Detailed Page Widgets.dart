@@ -3,6 +3,7 @@ import 'package:fab_circular_menu/fab_circular_menu.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_daily_news/Controller/Animation%20Controller.dart';
+import 'package:flutter_daily_news/Layouts/Bookmark%20Page.dart';
 import 'package:flutter_daily_news/Models/News%20Model.dart';
 import 'package:flutter_daily_news/Models/bookmark_model.dart';
 import 'package:flutter_daily_news/Services/URL%20Launch%20Services.dart';
@@ -37,12 +38,16 @@ class DetailedPageWidgets {
       padding: const EdgeInsets.all(8.0),
       child: Column(
         children: [
-          Card(
-            margin: EdgeInsets.all(0),
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(news.title,
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+          Container(
+            width: double.infinity,
+            child: Card(
+              margin: EdgeInsets.all(0),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(news.title,
+                    style:
+                        TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+              ),
             ),
           ),
           SizedBox(
@@ -64,7 +69,7 @@ class DetailedPageWidgets {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Text("Source: "),
-                            Expanded(
+                            Flexible(
                               child: Card(
                                 color: Colors.orange.shade100,
                                 child: Padding(
@@ -292,10 +297,20 @@ class DetailedPageWidgets {
     String publishedAt = formatter.format(news.publishedAt) ?? null;
     BookMarkModel bookednews = BookMarkModel(author, title, description, url,
         source, image, category, language, country, publishedAt);
-    Hive.box('bookmarks').add(bookednews).then((value) => Get.snackbar(
-        "Bookmark Added !", "",
-        snackPosition: SnackPosition.BOTTOM,
-        margin: EdgeInsets.only(bottom: 10)));
+    Hive.box('bookmarks').add(bookednews).then((value) => Get.snackbar("", "",
+            titleText: Text(
+              'Bookmark Added !',
+              style: TextStyle(color: Colors.white),
+            ),
+            messageText: Text(
+              'Tap to see bookmarks !',
+              style: TextStyle(color: Colors.white),
+            ), onTap: (snack) {
+          Get.to(() => BookmarkPage());
+        },
+            icon: Icon(Icons.bookmark),
+            snackPosition: SnackPosition.TOP,
+            margin: EdgeInsets.only(bottom: 10, left: 10, right: 10)));
   }
 
   myfabCircularMenu(
